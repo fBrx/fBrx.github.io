@@ -9,12 +9,12 @@ welcome to the github profile of @fBrx. feel free to browse and investigate my r
 ## samples [<img align="right" src="https://travis-ci.org/fBrx/samples.png">](https://travis-ci.org/fBrx/samples)
 a collection of sample project so i don't have to remember how to do things.
 
-check it out [here](https://github.com/fBrx/samples)
+check it out [here](http://fbrx.github.io/samples)
 
 ## utils [<img align="right" src="https://travis-ci.org/fBrx/samples.png">](https://travis-ci.org/fBrx/utils)
 handy utilities. 
 
-check it out [here](https://github.com/fBrx/utils)
+check it out [here](http://fbrx.github.io/utils)
 
 # contact
 
