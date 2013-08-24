@@ -1,9 +1,9 @@
 # repos
 
-## samples ![Build Status](https://travis-ci.org/fBrx/samples)
+## samples ![Build Status](https://travis-ci.org/fBrx/samples.png)
 a collection of sample project so i don't have to remember how to do things
 
-## utils ![Build Status](https://travis-ci.org/fBrx/utils)
+## utils ![Build Status](https://travis-ci.org/fBrx/utils.png)
 handy utilities
 
 # contact
