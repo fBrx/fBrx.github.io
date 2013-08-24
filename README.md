@@ -6,11 +6,15 @@ welcome to the github profile of @fBrx. feel free to browse and investigate my r
 
 # repos
 
-## samples <img align="right" src="https://travis-ci.org/fBrx/samples.png">
-a collection of sample project so i don't have to remember how to do things
+## samples [<img align="right" src="https://travis-ci.org/fBrx/samples.png">](https://travis-ci.org/fBrx/samples)
+a collection of sample project so i don't have to remember how to do things.
 
-## utils <img align="right" src="https://travis-ci.org/fBrx/utils.png">
-handy utilities
+check it out [here](https://github.com/fBrx/samples)
+
+## utils [<img align="right" src="https://travis-ci.org/fBrx/samples.png">](https://travis-ci.org/fBrx/utils)
+handy utilities. 
+
+check it out [here](https://github.com/fBrx/utils)
 
 # contact
 
