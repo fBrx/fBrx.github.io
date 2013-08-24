@@ -1,9 +1,15 @@
+# welcome
+
+welcome to the github profile of @fBrx. feel free to browse and investigate my repos (see below). 
+* if you find anything useful - feel free to use it
+* if you find any bugs or room for improvement (and you will) - feel free to fix it or drop me a note
+
 # repos
 
-## samples ![Build Status](https://travis-ci.org/fBrx/samples.png)
+## samples <img align="right" src="https://travis-ci.org/fBrx/samples.png">
 a collection of sample project so i don't have to remember how to do things
 
-## utils ![Build Status](https://travis-ci.org/fBrx/utils.png)
+## utils <img align="right" src="https://travis-ci.org/fBrx/utils.png">
 handy utilities
 
 # contact
