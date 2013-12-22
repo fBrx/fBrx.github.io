@@ -16,7 +16,7 @@ handy utilities.
 
 check it out [here](http://fbrx.github.io/utils)
 
-## propertySL
+## propertySL [<img align="right" src="https://travis-ci.org/fBrx/propertySL.png">](https://travis-ci.org/fBrx/propertySL)
 domain specific language for maintaining properties and resource bundles 
 
 check it out [here](http://fbrx.github.io/propertySL)
