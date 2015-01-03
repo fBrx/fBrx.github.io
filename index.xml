@@ -75,19 +75,19 @@
       <guid>https://fbrx.github.io/page/about/</guid>
       <description>
 
-&lt;h2 id=&#34;toc_0&#34;&gt;About - this blog&lt;/h2&gt;
+&lt;h2 id=&#34;toc_0&#34;&gt;&amp;hellip;this site&lt;/h2&gt;
 
-&lt;p&gt;This is my personal blog where I keep all kinds of stuff related to IT, photography and any other thoughts.&lt;/p&gt;
+&lt;p&gt;This is my personal site where I keep all kinds of stuff related to IT, photography and any other thoughts.&lt;/p&gt;
 
-&lt;p&gt;If you try to get in touch with me please do so via eMail at fbrx at homebase dot com.&lt;/p&gt;
+&lt;p&gt;This blog has been created with &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;, a static website engine. The theme is based on the &lt;a href=&#34;https://github.com/SenjinDarashiva/hugo-uno&#34;&gt;hugo-uno&lt;/a&gt; theme.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_1&#34;&gt;About - me - personally&lt;/h2&gt;
+&lt;h2 id=&#34;toc_1&#34;&gt;&amp;hellip;me&lt;/h2&gt;
 
-&lt;p&gt;I&amp;rsquo;m a lazy bum. And I like coffee.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m an software architect / engineer based out of Stuttgart, Germany. I focus mainly on everything java and enterprise.&lt;/p&gt;
 
-&lt;h2 id=&#34;toc_2&#34;&gt;About - me - professionally&lt;/h2&gt;
+&lt;p&gt;Besides my usual interest in design and performance, currently I&amp;rsquo;m deeply interested in anything related to improving the overall development performance - especially in larger teams. This spans from the usual suspects like continuous integration and delivery to thigs like container virtualization and model driven software development.&lt;/p&gt;
 
-&lt;p&gt;I tend to work to much.&lt;/p&gt;
+&lt;p&gt;Currently I&amp;rsquo;m employed by &lt;a href=&#34;http://www.cgi.com/&#34;&gt;CGI&lt;/a&gt;, a global IT consulting company. The thoughts and opinions expressed on this site are solely my own and have no relationship to my employer.&lt;/p&gt;
 </description>
     </item>
     
