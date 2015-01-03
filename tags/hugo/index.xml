@@ -25,7 +25,7 @@
 
 &lt;h2 id=&#34;toc_1&#34;&gt;Installation&lt;/h2&gt;
 
-&lt;p&gt;If you are using &lt;a href=&#34;http://brew.sh/&#34;&gt;homebrew&lt;/a&gt; (which you probably should anyway) just &lt;code&gt;brew install hugo&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you are running on a mac and are using &lt;a href=&#34;http://brew.sh/&#34;&gt;homebrew&lt;/a&gt; (which you probably should anyway) just &lt;code&gt;brew install hugo&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;toc_2&#34;&gt;Create your first site&lt;/h2&gt;
 
