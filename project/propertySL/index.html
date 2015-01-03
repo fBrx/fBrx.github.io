@@ -1,0 +1,307 @@
+    <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> propertySL &middot; // Florian Brüssel / fBrx </title>
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+    <link rel="stylesheet" type="text/css" href="https://fbrx.github.io/css/uno.min.css" />
+    
+    <link rel="stylesheet" type="text/css" href="https://fbrx.github.io/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="https://fbrx.github.io/css/lightGallery.css" />
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="// Florian Brüssel / fBrx" />
+    
+    <script src="https://fbrx.github.io/js/jquery.min.js"></script>
+    <script src="https://fbrx.github.io/js/main.js">
+
+    </script>
+</head>
+
+    <body>
+        <span class="mobile btn-mobile-menu">
+        <i class="fa fa-bars btn-mobile-menu__icon"></i>
+        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
+    </span>
+<header class="panel-cover panel-cover--collapsed"  style="background-image: url(/images/DSC_0667.jpg)" >
+    <div class="panel-main">
+        <div class="panel-main__inner panel-inverted">
+            <div class="panel-main__content"> 
+                <h1 class="panel-cover__title panel-title">
+                    <a href="https://fbrx.github.io" title="link to homepage for // Florian Brüssel / fBrx">// Florian Brüssel / fBrx</a>
+                </h1>
+                <hr class="panel-cover__divider" />
+                <p class="panel-cover__description">  ...fixing the world, one exception at a time...  </p>
+                <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                <div class="navigation-wrapper">
+                    <nav class="cover-navigation cover-navigation--primary">
+                        <ul class="navigation">
+                            <li class="navigation__item"><a href="/#blog" title="link to // Florian Brüssel / fBrx blog" class="blog-button">Blog</a> </li>
+                            
+                            
+                            
+                            <li class="navigation__item"><a href="/project/#blog" title="link to my projects  " class="blog-button">Projects</a> </li>
+                            
+                            
+                            
+                            <li class="navigation__item"><a href="/page/about" title="about this page " class="blog-button">About</a> </li>
+                            
+                        </ul>
+                    </nav> </br> <nav class="cover-navigation navigation--social">
+    <ul class="navigation"> 
+        
+        <li class="navigation__item">
+            <a href="http://twitter.com/f_brx" title="@f_brx on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
+        </li>   
+        
+        <li class="navigation__item">
+            <a href="https://github.com/fBrx" title="fBrx on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
+        </li>   
+        
+        
+        
+        <li class="navigation__item">
+            <a href="https://www.xing.com/profile/Florian_Bruessel" title="Xing"> <i class='fa fa-xing'></i> <span class="label">Xing</span> </a>
+        </li>   </ul>
+</nav>
+ </div>
+            </div>
+        </div>
+        <div class="panel-cover--overlay"></div>
+    </div>
+</header>
+
+        <div class="content-wrapper">
+            <div class="content-wrapper__inner">
+                <div class="post">
+                    <h1>propertySL</h1>
+                    <span class="post-date">Sat, Jan 3, 2015</span>
+                    
+
+<p><a href="https://travis-ci.org/fBrx/propertySL"><img align="right" src="https://travis-ci.org/fBrx/propertySL.png"></a></p>
+
+<h2 id="toc_0">Overview</h2>
+
+<p>The defined domain specific language - named <em>PropertySL</em> - let&rsquo;s you define properties and resource bundles in a concise way. It has support for namespaces, nesting and internationalization. The syntax is pretty straight forward to read and lets you define everything you need in one file.</p>
+
+<p>The project started initially as a sample project for exploring domain specific languages and the <a href="http://www.eclipse.org/Xtext/">Eclipse Xtext</a> technology.</p>
+
+<h2 id="toc_1">Example</h2>
+
+<p>The follwing is a basic definition of a <em>.psl</em> file witch defines some properties.</p>
+
+<pre><code class="language-java">/**
+* This is a demo package
+*/
+package com.github.fbrx.propertysl.demo {
+
+    SUPPORTED_LOCALES = {
+        default en, de
+    }
+
+    /** This is a simple property */
+    version = &quot;1.0&quot;
+
+    /** This is a complex property with NLS support */
+    greeting = {
+        en : &quot;Welcome to the world of PropertySL!&quot;
+        de : &quot;Willkommen in der Welt von PropertySL!&quot;
+    }
+}
+</code></pre>
+
+<p>The sample above will result in the file <em>com.github.fbrx.propertysl.demo.properties</em> being generated with the following content:
+in the following files being generated:</p>
+
+<ul>
+<li><em>com.github.fbrx.propertysl.demo.properties</em> (all properties for the <em>default locale</em>)</li>
+<li><em>com.github.fbrx.propertysl.demo_en.properties</em> (all properties for the locale <em>en</em> - same as default)</li>
+<li><em>com.github.fbrx.propertysl.demo_de.properties</em> (all properties for the locale <em>de</em>)</li>
+</ul>
+
+<p>The file <em>com.github.fbrx.propertysl.demo.properties</em> will contain the following:</p>
+
+<pre><code>####
+##  package : com.github.fbrx.propertysl.demo
+##  locale  : en (default)
+##
+##  generated by propertySL (https://github.com/fBrx/propertySL) on 2013-12-31 @ 11:24:27
+####
+
+####
+#	This is a demo package
+####
+
+com.github.fbrx.propertysl.demo.version = 1.0
+com.github.fbrx.propertysl.demo.greeting = Welcome to the world of PropertySL!
+</code></pre>
+
+<h2 id="toc_2">Syntax</h2>
+
+<h3 id="toc_3">Packages</h3>
+
+<p>With PropertySL properties are organized within packages. A package can contain zero or more properties of any kind. Packages can also contain other package (zero or more).</p>
+
+<p>For each defined package (at least) one property file will be generated. If a package contains no properties, no files will be generated for this package.</p>
+
+<p>When the resulting property files are generated the package names will be used:</p>
+
+<ul>
+<li>to generate the resulting filename</li>
+<li>to namespace the containing properties</li>
+</ul>
+
+<p>When packages are nested, the package name of the inner package will be generated as <em>packageNameOfParentPackage.packageNameOfNestedPackage</em>:</p>
+
+<pre><code class="language-java³">package com.github.fbrx.propertysl.demo {
+    version = &quot;1.0&quot;
+    package subpackage{
+        version = &quot;1.2&quot;
+    }
+
+}
+</code></pre>
+
+<p>The above sample code will generate the following property files:</p>
+
+<ul>
+<li><em>com.github.fbrx.propertysl.demo.properties</em></li>
+<li><em>com.github.fbrx.propertysl.demo.subpackage.properties</em></li>
+</ul>
+
+<p>Packages can also have additional settings configured (e.g. <em>SUPPORTED_LOCALES</em>).</p>
+
+<h3 id="toc_4">NLS Support (Ressource Bundles)</h3>
+
+<p>PropertySL has the ability to maintain properties for multiple languages (locales) in one place. This is to support the standard Java Resource Bundle layout for property files.</p>
+
+<p>To use the NLS-support, the locales which are to be supported by the package have to be provided as the first statement within the package:</p>
+
+<pre><code class="language-java">package com.github.fbrx.propertysl.demo {
+    SUPPORTED_LOCALES = {
+        de, default en, en_US
+    }
+    //...
+}
+</code></pre>
+
+<p>Locales can be defined by either language code only (i.e. <code>en</code>) or language and country code to be more specific (i.e. <code>en_US</code>). Multiple values are separated by comma.</p>
+
+<p>One of the defined locales can optionally be defined as the default locale. This results in a default ressource bundle file being generated. This file contains all the values which are defined for the respective locale. It is advised to always set the default locale.</p>
+
+<p>The definition above would result in the following files being generated:</p>
+
+<pre><code>/src-gen
+|- com.github.fbrx.propertysl.demo.properties		# the default locale (same contents as *_en.properties)
+|- com.github.fbrx.propertysl.demo_de.properties	# only properties which have a value for 'de' set
+|- com.github.fbrx.propertysl.demo_en_US.properties	# only properties which have a value for 'en' set
+|- com.github.fbrx.propertysl.demo_en_GB.properties	# only properties which have a value for 'en_US' set
+</code></pre>
+
+<h3 id="toc_5">Properties</h3>
+
+<h4 id="toc_6">Simple Properties</h4>
+
+<p>To define a simple property the following syntax can be used:</p>
+
+<pre><code class="language-java">/** property comment */
+key = &quot;value&quot;
+</code></pre>
+
+<p>The above sample will be generated to the following entry in the resulting property file:</p>
+
+<pre><code>#	property comment
+key = value
+</code></pre>
+
+<p>If the package supports multiple locales, the value of the simple property will only be set for the default locale.</p>
+
+<h4 id="toc_7">Complex Properties (Multi-Language Properties)</h4>
+
+<p>To define a complex property which supports multiple languages the follwing syntax can be used:</p>
+
+<pre><code class="language-java">/** property comment */
+key = {
+    locale : &quot;value&quot;
+    locale : &quot;value&quot;
+}
+</code></pre>
+
+<p>For complex properties an entry with the according value will be generated in each supported locale specific property file.
+The following rules and restrictions apply:</p>
+
+<ul>
+<li>If additional values for unsupported locales are defined, they will be silently ignored.</li>
+<li>If definitions for a supported locale is missing, no entry will be generated in the according locale specific property file</li>
+<li>If no value is set for the default locale, an error will be generated.</li>
+<li>To use complex properties, the <em>SUPPORTED_LOCALES</em> have to be set for the containing package</li>
+</ul>
+
+<h3 id="toc_8">Comments</h3>
+
+<p>To give a summary of packages contents as well as detailed explanations for single properties PropertySL supports a comprehensive comment facility.</p>
+
+<p>To associate a comment with a package or property just place it in front of the according element:</p>
+
+<pre><code class="language-java">/**
+* Comments can describe package contents and give an overview
+* of the purpose of the contained proeprties.
+*
+* Comments can span as many lines as needed.
+*/
+package com.github.fbrx.propertysl.demo {
+
+    /** Properties can have comments too!  */
+    greeting = &quot;Howdy, partner!&quot;
+}
+</code></pre>
+
+<p>The above comments will be rendered to the resulting property files (<em>com.github.fbrx.propertysl.demo.properties</em> in the example) in the following way:</p>
+
+<pre><code class="language-properties">####
+#	Comments can describe package contents and give an overview
+#	of the purpose of the contained proeprties.
+#
+#	Comments can span as many lines as needed.
+####
+
+#	Properties can have comments too!
+com.github.fbrx.propertysl.demo.greeting = Howdy, partner!
+</code></pre>
+
+<p>Comments can also be placed at any other place in the <em>.psl</em> file where they will be silently ignored.</p>
+
+<h2 id="toc_9">Editor support</h2>
+
+<p>The PropertySL was defined by means of the <a href="http://www.eclipse.org/Xtext/">Eclipse Xtext</a> and <a href="http://www.eclipse.org/Xtend/">Eclipse Xtend</a> technologies. Thus there is also first class (Eclipse based) editor support built-in.</p>
+
+<p><img src="https://raw.github.com/fBrx/propertySL/master/editor.png" alt="PropertySL Editor" />
+</p>
+
+<p>The editor supports the following features:</p>
+
+<ul>
+<li>Syntax highlighting for keywords</li>
+<li>Autocompletion for language constructs</li>
+<li>Validation of syntax and semantics</li>
+<li>Comprehensive Outline</li>
+<li>Quick Fixes for common errors and warnings</li>
+</ul>
+
+<h1 id="toc_10">Attributions</h1>
+
+<ul>
+<li>Icons for the Eclipse Outline were taken from the <a href="http://ikons.piotrkwiatkowski.co.uk/" title="IKONS">IKONS</a> package by <a href="http://www.piotrkwiatkowski.co.uk/">Piotr Kwiatkowski</a></li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+    </body>
+    
+</html>
