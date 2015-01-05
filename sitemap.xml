@@ -3,13 +3,8 @@
   
   <url>
     <loc>https://fbrx.github.io/</loc>
-    <lastmod>2015-01-03T16:49:59+01:00</lastmod>
+    <lastmod>2015-01-02T17:35:43+01:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://fbrx.github.io/project/propertySL/</loc>
-    <lastmod>2015-01-03T16:49:59+01:00</lastmod>
   </url>
   
   <url>
@@ -25,6 +20,11 @@
   <url>
     <loc>https://fbrx.github.io/page/about/</loc>
     <lastmod>2015-01-01T16:21:51+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fbrx.github.io/project/propertySL/</loc>
+    <lastmod>2013-12-22T16:49:59+01:00</lastmod>
   </url>
   
 </urlset>
