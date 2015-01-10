@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Atom on // Florian Brüssel / fBrx </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>https://fbrx.github.io/tags/atom/index.xml/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Fri, 05 Dec 2014 23:19:01 &#43;0100</updated>
+    
+    <item>
+      <title>language-xtext</title>
+      <link>https://fbrx.github.io/project/language-xtext/</link>
+      <pubDate>Fri, 05 Dec 2014 23:19:01 &#43;0100</pubDate>
+      
+      <guid>https://fbrx.github.io/project/language-xtext/</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;This repository contains a package which adds syntax highlighting for  &lt;a href=&#34;http://www.eclipse.org/Xtext/&#34;&gt;Xtext&lt;/a&gt; to your favorite editor (which is &lt;a href=&#34;https://atom.io/&#34;&gt;atom&lt;/a&gt; btw).&lt;/p&gt;
+
+&lt;p&gt;From the Xtext homepage:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Xtext is a framework for development of programming languages and domain specific languages.&lt;/p&gt;
+
+&lt;p&gt;It covers all aspects of a complete language infrastructure, from parsers, over linker, compiler or interpreter to fully-blown top-notch Eclipse IDE integration. It comes with great defaults for all these aspects which at the same time can be easily tailored to your individual needs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Current State&lt;/h2&gt;
+
+&lt;p&gt;The current state of the project is pretty much wip - with the only problem beeing, that I don&amp;rsquo;t have much time to put any more effort into this.&lt;/p&gt;
+
+&lt;p&gt;So if there are any contributions I would be happy to include them.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Since this package has not yet been published to atom.io you have to install it manually. For this you can just clone the repository into your &lt;code&gt;~/.atom/packages&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ~/.atom/packages
+git clone https://github.com/fBrx/language-xtext.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Restart atom and enjoy the magic.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
