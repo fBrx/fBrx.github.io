@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Spring on // Florian Brüssel / fBrx </title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>https://fbrx.github.io/tags/spring/index.xml/</link>
+    <language>en-us</language>
+    
+    
+    <updated>Sat, 24 Aug 2013 22:24:13 &#43;0100</updated>
+    
+    <item>
+      <title>samples</title>
+      <link>https://fbrx.github.io/project/samples/</link>
+      <pubDate>Sat, 24 Aug 2013 22:24:13 &#43;0100</pubDate>
+      
+      <guid>https://fbrx.github.io/project/samples/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://travis-ci.org/fBrx/samples&#34;&gt;&lt;img align=&#34;right&#34; src=&#34;https://travis-ci.org/fBrx/samples.png&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;overview&lt;/h2&gt;
+
+&lt;p&gt;This &lt;a href=&#34;https://github.com/fBrx/samples&#34;&gt;repository&lt;/a&gt; contains small sample projects which each demonstrate the usage of certain technologies.&lt;/p&gt;
+
+&lt;p&gt;These sample projects are here for educational purposes (of myself) only and act as an extension of my brain. Thus they are not actively maintained once they are done.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;projects&lt;/h2&gt;
+
+&lt;p&gt;the following projects are currently existing:&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;&lt;a href=&#34;https://github.com/fBrx/samples/tree/master/jaxrs-plain&#34;&gt;jaxrs-plain&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;demonstrating the usage of the jax-rs ri (jersey) to create a sample REST service&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;&lt;a href=&#34;https://github.com/fBrx/samples/tree/master/jaxrs-spring&#34;&gt;jaxrs-spring&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;demonstrating the usage of the jax-rs ri (jersey) in combination with a spring enabled web application&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_4&#34;&gt;&lt;a href=&#34;https://github.com/fBrx/samples/tree/master/jaxws-provider&#34;&gt;jaxws-provider&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;demonstrating the usage of the jax-ws library in conjunction with spring. integrates spring security and implements custom jax-ws handlers&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_5&#34;&gt;&lt;a href=&#34;https://github.com/fBrx/samples/tree/master/juel-sample&#34;&gt;juel-sample&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;demonstrating the usage of the java unified expression language in plain java contexts&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_6&#34;&gt;&lt;a href=&#34;https://github.com/fBrx/samples/tree/master/jvm-maintenance&#34;&gt;jvm-maintenance&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;sample web application displaying information about the current runtime and request&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_7&#34;&gt;&lt;a href=&#34;https://github.com/fBrx/samples/tree/master/xslt-sample&#34;&gt;xslt-sample&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;demonstrating the usage of xslt&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_8&#34;&gt;support&lt;/h2&gt;
+
+&lt;p&gt;if you have any issues feel free to contact me or &lt;a href=&#34;https://github.com/fBrx/samples/issues&#34;&gt;create an issue&lt;/a&gt;. alternatively you are always welcome to fix it yourself and send me a pull request ;)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
