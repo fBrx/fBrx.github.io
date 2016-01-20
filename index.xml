@@ -7,7 +7,80 @@
     <language>en-us</language>
     
     
-    <updated>Fri, 02 Jan 2015 17:35:43 &#43;0100</updated>
+    <updated>Wed, 20 Jan 2016 19:09:27 &#43;0100</updated>
+    
+    <item>
+      <title>Building your first Docker image</title>
+      <link>https://fbrx.github.io/post/build-your-first-docker-image/</link>
+      <pubDate>Wed, 20 Jan 2016 19:09:27 &#43;0100</pubDate>
+      
+      <guid>https://fbrx.github.io/post/build-your-first-docker-image/</guid>
+      <description>
+
+&lt;p&gt;Docker images are the way to distribute preconfigured, rebuildable containers.&lt;/p&gt;
+
+&lt;p&gt;This can for example be used to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;persist the runtime configuration for a project in the SCM system of your choice and&lt;/li&gt;
+&lt;li&gt;exchange configurations between team members&lt;/li&gt;
+&lt;li&gt;get new team members up and running in minutes instead of days&lt;/li&gt;
+&lt;li&gt;aleviate the burden of keeping a running dev environment up to date as long as the software is in production - even if the backlog is empty&lt;/li&gt;
+&lt;li&gt;&amp;hellip;and many more&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To create a docker image you basically have two options:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;start a container, customize the environment to your liking and finally package the container as a reusable image&lt;/li&gt;
+&lt;li&gt;build an image by means of a Dockerfile&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you plan on reusing and distributing your image it is always recommended to use a Dockerfile to describe the resulting environment. If an image is just packaged from an existing container, there is no easy way for the future user to know what functionality is provided by the image.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Creating a Dockerfile&lt;/h1&gt;
+
+&lt;p&gt;The Dockerfile is the Docker-way of specifiing the characteristics of an image, which can then be used to create a running container. You can think of the Dockerfile as a recipe to automatically build your image.&lt;/p&gt;
+
+&lt;p&gt;The Dockerfile is made up of different commands. There is a comprehensive &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/&#34;&gt;Dockerfile reference&lt;/a&gt; provided.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;The base image&lt;/h2&gt;
+
+&lt;p&gt;The base image specifies the starting point of your container description. Usually you will not start with an empty container, but extend or customize an existing container (e.g. ubuntu or tomcat). You specifiy the base image with the &lt;code&gt;FROM &amp;lt;image&amp;gt;[:&amp;lt;tag&amp;gt;]&lt;/code&gt; directive. The definition of the base image must be the first non-comment instruction in the Dockerfile.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Commands&lt;/h2&gt;
+
+&lt;p&gt;All of the available commands are documented extensively in the &lt;a href=&#34;https://docs.docker.com/engine/reference/builder/&#34;&gt;Dockerfile reference&lt;/a&gt; and will not be covered in detail here.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;ENTRYPOINT and CMD&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code&gt;ENTRYPOINT&lt;/code&gt; and &lt;code&gt;CMD&lt;/code&gt; directives can be used to create executable containers and specify the command (and arguments) to be run on startup.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;ENTRYPOINT&lt;/code&gt; defines the default command (optionally including arguments) which is executed when an image is run via the &lt;code&gt;docker run &amp;lt;image&amp;gt;&lt;/code&gt; command.
+The &lt;code&gt;CMD&lt;/code&gt; dirctive is used to specify default arguments to the executable defined in the entrypoint. If any command line arguments are supplied to the &lt;code&gt;docker run &amp;lt;image&amp;gt;&lt;/code&gt; command, they wil replace the values specified in the Dockerfile. This can thus be used to provide a sensible default configuration to easily create and run a container based on your image without loosing the flexibility of customizing the startup command parameters (and minimizing he need to create a seperate Dockerfile just to adjust the command parameters).&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; There are different possibilities and combinations for using the two directives, but the scenario described above worked out the best for me.&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_4&#34;&gt;Creating the image&lt;/h1&gt;
+
+&lt;p&gt;To create the image, you must buils it. This basically means that the instructions in the Dockerfile have to be executed, recorded and persisted in the resulting image with the name of your choice. The image gets build with the &lt;code&gt;docker build&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker build -t &amp;lt;namespace&amp;gt;/&amp;lt;image&amp;gt;:&amp;lt;tag&amp;gt; &amp;lt;base dir&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will execute the Dockerfile and store the resulting image in the local repository. The option after the &lt;code&gt;-t&lt;/code&gt; flag specifies the desired name of your resulting image in the (local) repository. Even though this setting is optional, I would always recommend setting it, since otherwise you will not be able to easily reference your newly built image.
+The image names consist of a namespace and a tag name. You can group different images under a namespace. If you use the &lt;a href=&#34;https://hub.docker.com&#34;&gt;Docker Hub&lt;/a&gt; your account name will be the namespace for your images.
+The tag can be used to provide different versions of an image. If not specified the tag &amp;lsquo;latest&amp;rsquo; will be implied.&lt;/p&gt;
+
+&lt;p&gt;You can check, that your image was built successfully and stored in the local repository by running the &lt;code&gt;docker images&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ docker images
+REPOSITORY     TAG        IMAGE ID         CREATED           VIRTUAL SIZE
+fbrx/test      latest     756a1405cd9e     7 minutes ago     237.7 MB
+&amp;lt;none&amp;gt;         &amp;lt;none&amp;gt;     ee6e804e0180     8 minutes ago     237.7 MB
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Getting started with Hugo</title>
@@ -85,7 +158,7 @@
 
 &lt;p&gt;Besides my usual interest in design and performance, currently I&amp;rsquo;m deeply interested in anything related to improving the overall development performance - especially in larger teams. This spans from the usual suspects like continuous integration and delivery to thigs like container virtualization and model driven software development.&lt;/p&gt;
 
-&lt;p&gt;Currently I&amp;rsquo;m employed by &lt;a href=&#34;http://www.cgi.com/&#34;&gt;CGI&lt;/a&gt;, a global IT consulting company. The thoughts and opinions expressed on this site are solely my own and have no relationship to my employer.&lt;/p&gt;
+&lt;p&gt;Currently I&amp;rsquo;m employed by &lt;a href=&#34;http://www.ww-informatik.de/&#34;&gt;W&amp;amp;W Informatik GmbH&lt;/a&gt;, the only IT supplier for the &lt;a href=&#34;http://www.ww-ag.de&#34;&gt;W&amp;amp;W AG&lt;/a&gt;. The thoughts and opinions expressed on this site are solely my own and have no relationship to my employer.&lt;/p&gt;
 </description>
     </item>
     
@@ -186,7 +259,7 @@ in the following files being generated:&lt;/p&gt;
 ####
 
 ####
-#	This is a demo package
+#   This is a demo package
 ####
 
 com.github.fbrx.propertysl.demo.version = 1.0
@@ -249,10 +322,10 @@ com.github.fbrx.propertysl.demo.greeting = Welcome to the world of PropertySL!
 &lt;p&gt;The definition above would result in the following files being generated:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;/src-gen
-|- com.github.fbrx.propertysl.demo.properties		# the default locale (same contents as *_en.properties)
-|- com.github.fbrx.propertysl.demo_de.properties	# only properties which have a value for &#39;de&#39; set
-|- com.github.fbrx.propertysl.demo_en_US.properties	# only properties which have a value for &#39;en&#39; set
-|- com.github.fbrx.propertysl.demo_en_GB.properties	# only properties which have a value for &#39;en_US&#39; set
+|- com.github.fbrx.propertysl.demo.properties       # the default locale (same contents as *_en.properties)
+|- com.github.fbrx.propertysl.demo_de.properties    # only properties which have a value for &#39;de&#39; set
+|- com.github.fbrx.propertysl.demo_en_US.properties # only properties which have a value for &#39;en&#39; set
+|- com.github.fbrx.propertysl.demo_en_GB.properties # only properties which have a value for &#39;en_US&#39; set
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;toc_5&#34;&gt;Properties&lt;/h3&gt;
@@ -267,7 +340,7 @@ key = &amp;quot;value&amp;quot;
 
 &lt;p&gt;The above sample will be generated to the following entry in the resulting property file:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;#	property comment
+&lt;pre&gt;&lt;code&gt;#   property comment
 key = value
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -316,13 +389,13 @@ package com.github.fbrx.propertysl.demo {
 &lt;p&gt;The above comments will be rendered to the resulting property files (&lt;em&gt;com.github.fbrx.propertysl.demo.properties&lt;/em&gt; in the example) in the following way:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-properties&#34;&gt;####
-#	Comments can describe package contents and give an overview
-#	of the purpose of the contained proeprties.
+#   Comments can describe package contents and give an overview
+#   of the purpose of the contained proeprties.
 #
-#	Comments can span as many lines as needed.
+#   Comments can span as many lines as needed.
 ####
 
-#	Properties can have comments too!
+#   Properties can have comments too!
 com.github.fbrx.propertysl.demo.greeting = Howdy, partner!
 &lt;/code&gt;&lt;/pre&gt;
 

@@ -106,7 +106,7 @@ in the following files being generated:&lt;/p&gt;
 ####
 
 ####
-#	This is a demo package
+#   This is a demo package
 ####
 
 com.github.fbrx.propertysl.demo.version = 1.0
@@ -169,10 +169,10 @@ com.github.fbrx.propertysl.demo.greeting = Welcome to the world of PropertySL!
 &lt;p&gt;The definition above would result in the following files being generated:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;/src-gen
-|- com.github.fbrx.propertysl.demo.properties		# the default locale (same contents as *_en.properties)
-|- com.github.fbrx.propertysl.demo_de.properties	# only properties which have a value for &#39;de&#39; set
-|- com.github.fbrx.propertysl.demo_en_US.properties	# only properties which have a value for &#39;en&#39; set
-|- com.github.fbrx.propertysl.demo_en_GB.properties	# only properties which have a value for &#39;en_US&#39; set
+|- com.github.fbrx.propertysl.demo.properties       # the default locale (same contents as *_en.properties)
+|- com.github.fbrx.propertysl.demo_de.properties    # only properties which have a value for &#39;de&#39; set
+|- com.github.fbrx.propertysl.demo_en_US.properties # only properties which have a value for &#39;en&#39; set
+|- com.github.fbrx.propertysl.demo_en_GB.properties # only properties which have a value for &#39;en_US&#39; set
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;toc_5&#34;&gt;Properties&lt;/h3&gt;
@@ -187,7 +187,7 @@ key = &amp;quot;value&amp;quot;
 
 &lt;p&gt;The above sample will be generated to the following entry in the resulting property file:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;#	property comment
+&lt;pre&gt;&lt;code&gt;#   property comment
 key = value
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -236,13 +236,13 @@ package com.github.fbrx.propertysl.demo {
 &lt;p&gt;The above comments will be rendered to the resulting property files (&lt;em&gt;com.github.fbrx.propertysl.demo.properties&lt;/em&gt; in the example) in the following way:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-properties&#34;&gt;####
-#	Comments can describe package contents and give an overview
-#	of the purpose of the contained proeprties.
+#   Comments can describe package contents and give an overview
+#   of the purpose of the contained proeprties.
 #
-#	Comments can span as many lines as needed.
+#   Comments can span as many lines as needed.
 ####
 
-#	Properties can have comments too!
+#   Properties can have comments too!
 com.github.fbrx.propertysl.demo.greeting = Howdy, partner!
 &lt;/code&gt;&lt;/pre&gt;
 

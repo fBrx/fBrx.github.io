@@ -147,7 +147,7 @@ in the following files being generated:</p>
 ####
 
 ####
-#	This is a demo package
+#   This is a demo package
 ####
 
 com.github.fbrx.propertysl.demo.version = 1.0
@@ -210,10 +210,10 @@ com.github.fbrx.propertysl.demo.greeting = Welcome to the world of PropertySL!
 <p>The definition above would result in the following files being generated:</p>
 
 <pre><code>/src-gen
-|- com.github.fbrx.propertysl.demo.properties		# the default locale (same contents as *_en.properties)
-|- com.github.fbrx.propertysl.demo_de.properties	# only properties which have a value for 'de' set
-|- com.github.fbrx.propertysl.demo_en_US.properties	# only properties which have a value for 'en' set
-|- com.github.fbrx.propertysl.demo_en_GB.properties	# only properties which have a value for 'en_US' set
+|- com.github.fbrx.propertysl.demo.properties       # the default locale (same contents as *_en.properties)
+|- com.github.fbrx.propertysl.demo_de.properties    # only properties which have a value for 'de' set
+|- com.github.fbrx.propertysl.demo_en_US.properties # only properties which have a value for 'en' set
+|- com.github.fbrx.propertysl.demo_en_GB.properties # only properties which have a value for 'en_US' set
 </code></pre>
 
 <h3 id="toc_5">Properties</h3>
@@ -228,7 +228,7 @@ key = &quot;value&quot;
 
 <p>The above sample will be generated to the following entry in the resulting property file:</p>
 
-<pre><code>#	property comment
+<pre><code>#   property comment
 key = value
 </code></pre>
 
@@ -277,13 +277,13 @@ package com.github.fbrx.propertysl.demo {
 <p>The above comments will be rendered to the resulting property files (<em>com.github.fbrx.propertysl.demo.properties</em> in the example) in the following way:</p>
 
 <pre><code class="language-properties">####
-#	Comments can describe package contents and give an overview
-#	of the purpose of the contained proeprties.
+#   Comments can describe package contents and give an overview
+#   of the purpose of the contained proeprties.
 #
-#	Comments can span as many lines as needed.
+#   Comments can span as many lines as needed.
 ####
 
-#	Properties can have comments too!
+#   Properties can have comments too!
 com.github.fbrx.propertysl.demo.greeting = Howdy, partner!
 </code></pre>
 
