@@ -7,7 +7,67 @@
     <language>en-us</language>
     
     
-    <updated>Wed, 20 Jan 2016 19:09:27 &#43;0100</updated>
+    <updated>Thu, 21 Jan 2016 00:20:45 &#43;0100</updated>
+    
+    <item>
+      <title>Fixing Tomcat startup performance on cloud servers</title>
+      <link>https://fbrx.github.io/post/fixing-tomcat-startup-performance-on-cloud-servers/</link>
+      <pubDate>Thu, 21 Jan 2016 00:20:45 &#43;0100</pubDate>
+      
+      <guid>https://fbrx.github.io/post/fixing-tomcat-startup-performance-on-cloud-servers/</guid>
+      <description>
+
+&lt;p&gt;Apache Tomcat is well known to be a lightweight and &lt;em&gt;fast&lt;/em&gt; web container. This makes it a perfect fit for running your Java based web applications. Doing just that and playing around with &lt;a href=&#34;https://www.tutum.co/&#34;&gt;Docker Tutum&lt;/a&gt; and &lt;a href=&#34;https://www.digitalocean.com&#34;&gt;Digitalocean&lt;/a&gt; I discovered that starting up a Docker Container, which would take &amp;lt;25s locally took over 2 minutes when being deployed on a Digitalocean server.&lt;/p&gt;
+
+&lt;p&gt;Digging through the logs, the following line cought my attention:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INFO: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [199,620] milliseconds.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Searching the web I found the solution on the allmighty &lt;a href=&#34;https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source&#34;&gt;StackOverflow&lt;/a&gt; and the &lt;a href=&#34;https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source&#34;&gt;Tomcat Wiki&lt;/a&gt;. The explanation given there is as follows:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Tomcat 7+ heavily relies on SecureRandom class to provide random values for its session ids and in other places. Depending on your JRE it can cause delays during startup if entropy source that is used to initialize SecureRandom is short of entropy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This makes perfectly sense as the servers, which are provided by Digitalocean (and probably all other cloud providers) would all be virtualized and spun up from the same templates. The lack of any external peripherals which produce unpredictable inputs (like keyboard, mouse, soundchips, etc) may lead to a low source of entropy. Using a blocking entropy source will guarantee a sufficient level of entropy but - as the name suggests - will block in case of low entropy until a sufficient level is reached.&lt;/p&gt;
+
+&lt;p&gt;The default (blocking) entropy source used by Java under Linux is &lt;code&gt;/dev/random&lt;/code&gt;. This can be swapped out for the non-blocking version &lt;code&gt;/dev/urandom&lt;/code&gt; by setting the Java system property &lt;code&gt;java.security.egd&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-Djava.security.egd=file:/dev/./urandom
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For Tomcat the right place to put this setting would be the CATALINA_OPTS property in the file &lt;em&gt;apache-tomcat/bin/setenv.sh&lt;/em&gt;. If not already existing, you can create an appropriate file with the folowing command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;CATALINA_OPTS=-Djava.security.egd=file:/dev/./urandom&amp;quot; &amp;gt; apache-tomcat/bin/setenv.sh &amp;amp;&amp;amp; \
+chmod a+x apache-tomcat/bin/setenv.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For all you Docker geeks out there I provided a Docker base image, which has the setting preconfigured under &lt;a href=&#34;https://hub.docker.com/r/fbrx/tomcat/&#34;&gt;fbrx/tomcat&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;/dev/random vs /dev/urandom&lt;/h2&gt;
+
+&lt;p&gt;In Tomcat the SecureRandom instance is used for session id generation. If you are running in a highly sensitive environment this might be of concern to you. Otherwise this is probably no problem. Anyways always use good judement and think about the consequences.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;man 4 random&lt;/code&gt; provides further detail on he difference:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;/dev/random should be suitable for uses that need very high quality randomness such as one-time pad or key generation. When the entropy pool is empty, reads from /dev/random will block until additional environmental noise is gathered.&lt;/p&gt;
+
+&lt;p&gt;A read from the /dev/urandom device will not block waiting for more entropy. As a result, if there is not sufficient entropy in the entropy pool, the returned values are theoretically vulnerable to a cryptographic attack on the algorithms used by the driver. Knowledge of how to do this is not available in the current unclassified literature, but it is theoretically possible that such an attack may exist. If this is a concern in your application, use /dev/random instead.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Sources and further reading&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/28201794/slow-startup-on-tomcat-7-0-57-because-of-securerandom&#34;&gt;http://stackoverflow.com/questions/28201794/slow-startup-on-tomcat-7-0-57-because-of-securerandom&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hub.docker.com/r/fbrx/tomcat/&#34;&gt;https://hub.docker.com/r/fbrx/tomcat/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://security.stackexchange.com/questions/89/feeding-dev-random-entropy-pool&#34;&gt;http://security.stackexchange.com/questions/89/feeding-dev-random-entropy-pool&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source&#34;&gt;https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://linux.die.net/man/4/random&#34;&gt;http://linux.die.net/man/4/random&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Building your first Docker image</title>

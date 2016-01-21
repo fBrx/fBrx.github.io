@@ -3,8 +3,13 @@
   
   <url>
     <loc>https://fbrx.github.io/</loc>
-    <lastmod>2016-01-20T19:09:27+01:00</lastmod>
+    <lastmod>2016-01-21T00:20:45+01:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://fbrx.github.io/post/fixing-tomcat-startup-performance-on-cloud-servers/</loc>
+    <lastmod>2016-01-21T00:20:45+01:00</lastmod>
   </url>
   
   <url>

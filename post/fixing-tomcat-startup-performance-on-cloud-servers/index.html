@@ -1,0 +1,187 @@
+  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> Fixing Tomcat startup performance on cloud servers &middot; // Florian Brüssel / fBrx </title>
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+    <link rel="stylesheet" type="text/css" href="https://fbrx.github.io/css/uno.min.css" />
+    
+    <link rel="stylesheet" type="text/css" href="https://fbrx.github.io/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="https://fbrx.github.io/css/lightGallery.css" />
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="// Florian Brüssel / fBrx" />
+    
+    <script src="https://fbrx.github.io/js/jquery.min.js"></script>
+    <script src="https://fbrx.github.io/js/main.js">
+
+    </script>
+
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-58295831-1', 'auto', {'siteSpeedSampleRate': 100});
+    ga('send', 'pageview');
+
+    </script>
+
+</head>
+
+  <body>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-bars btn-mobile-menu__icon"></i>
+        <i class="fa fa-times btn-mobile-close__icon hidden"></i>
+    </span>
+<header class="panel-cover panel-cover--collapsed"  style="background-image: url(/images/DSC_0667.jpg)" >
+    <div class="panel-main">
+        <div class="panel-main__inner panel-inverted">
+            <div class="panel-main__content"> 
+                <h1 class="panel-cover__title panel-title">
+                    <a href="https://fbrx.github.io" title="link to homepage for // Florian Brüssel / fBrx">// Florian Brüssel / fBrx</a>
+                </h1>
+                <hr class="panel-cover__divider" />
+                <p class="panel-cover__description">  ...fixing the world, one exception at a time...  </p>
+                <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                <div class="navigation-wrapper">
+                    <nav class="cover-navigation cover-navigation--primary">
+                        <ul class="navigation">
+                            <li class="navigation__item"><a href="/#blog" title="link to // Florian Brüssel / fBrx blog" class="blog-button">Blog</a> </li>
+                            
+                            
+                            
+                            <li class="navigation__item"><a href="/project/#blog" title="link to my projects  " class="blog-button">Projects</a> </li>
+                            
+                            
+                            
+                            <li class="navigation__item"><a href="/page/about" title="about this page " class="blog-button">About</a> </li>
+                            
+                        </ul>
+                    </nav> </br> <nav class="cover-navigation navigation--social">
+    <ul class="navigation"> 
+        
+        <li class="navigation__item">
+            <a href="http://twitter.com/f_brx" title="@f_brx on Twitter"> <i class='fa fa-tt'></i> <span class="label">Twitter</span> </a>
+        </li>   
+        
+        <li class="navigation__item">
+            <a href="https://github.com/fBrx" title="fBrx on github"> <i class='fa fa-github'></i> <span class="label">Github</span> </a>
+        </li>   
+        
+        
+        
+        <li class="navigation__item">
+            <a href="https://www.xing.com/profile/Florian_Bruessel" title="Xing"> <i class='fa fa-xing'></i> <span class="label">Xing</span> </a>
+        </li>   </ul>
+</nav>
+ </div>
+            </div>
+        </div>
+        <div class="panel-cover--overlay"></div>
+    </div>
+</header>
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+          
+        <div class="post">
+            <div class="post-single-meta">
+                <span class="post-date">Thu, Jan 21, 2016 by fBrx</span>
+            </div>
+            <h1>Fixing Tomcat startup performance on cloud servers</h1>
+            
+
+<p>Apache Tomcat is well known to be a lightweight and <em>fast</em> web container. This makes it a perfect fit for running your Java based web applications. Doing just that and playing around with <a href="https://www.tutum.co/">Docker Tutum</a> and <a href="https://www.digitalocean.com">Digitalocean</a> I discovered that starting up a Docker Container, which would take &lt;25s locally took over 2 minutes when being deployed on a Digitalocean server.</p>
+
+<p>Digging through the logs, the following line cought my attention:</p>
+
+<pre><code>INFO: Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [199,620] milliseconds.
+</code></pre>
+
+<p>Searching the web I found the solution on the allmighty <a href="https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source">StackOverflow</a> and the <a href="https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source">Tomcat Wiki</a>. The explanation given there is as follows:</p>
+
+<blockquote>
+<p>Tomcat 7+ heavily relies on SecureRandom class to provide random values for its session ids and in other places. Depending on your JRE it can cause delays during startup if entropy source that is used to initialize SecureRandom is short of entropy.</p>
+</blockquote>
+
+<p>This makes perfectly sense as the servers, which are provided by Digitalocean (and probably all other cloud providers) would all be virtualized and spun up from the same templates. The lack of any external peripherals which produce unpredictable inputs (like keyboard, mouse, soundchips, etc) may lead to a low source of entropy. Using a blocking entropy source will guarantee a sufficient level of entropy but - as the name suggests - will block in case of low entropy until a sufficient level is reached.</p>
+
+<p>The default (blocking) entropy source used by Java under Linux is <code>/dev/random</code>. This can be swapped out for the non-blocking version <code>/dev/urandom</code> by setting the Java system property <code>java.security.egd</code>:</p>
+
+<pre><code>-Djava.security.egd=file:/dev/./urandom
+</code></pre>
+
+<p>For Tomcat the right place to put this setting would be the CATALINA_OPTS property in the file <em>apache-tomcat/bin/setenv.sh</em>. If not already existing, you can create an appropriate file with the folowing command:</p>
+
+<pre><code>echo &quot;CATALINA_OPTS=-Djava.security.egd=file:/dev/./urandom&quot; &gt; apache-tomcat/bin/setenv.sh &amp;&amp; \
+chmod a+x apache-tomcat/bin/setenv.sh
+</code></pre>
+
+<p>For all you Docker geeks out there I provided a Docker base image, which has the setting preconfigured under <a href="https://hub.docker.com/r/fbrx/tomcat/">fbrx/tomcat</a>.</p>
+
+<h2 id="toc_0">/dev/random vs /dev/urandom</h2>
+
+<p>In Tomcat the SecureRandom instance is used for session id generation. If you are running in a highly sensitive environment this might be of concern to you. Otherwise this is probably no problem. Anyways always use good judement and think about the consequences.</p>
+
+<p><code>man 4 random</code> provides further detail on he difference:</p>
+
+<blockquote>
+<p>/dev/random should be suitable for uses that need very high quality randomness such as one-time pad or key generation. When the entropy pool is empty, reads from /dev/random will block until additional environmental noise is gathered.</p>
+
+<p>A read from the /dev/urandom device will not block waiting for more entropy. As a result, if there is not sufficient entropy in the entropy pool, the returned values are theoretically vulnerable to a cryptographic attack on the algorithms used by the driver. Knowledge of how to do this is not available in the current unclassified literature, but it is theoretically possible that such an attack may exist. If this is a concern in your application, use /dev/random instead.</p>
+</blockquote>
+
+<h2 id="toc_1">Sources and further reading</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/28201794/slow-startup-on-tomcat-7-0-57-because-of-securerandom">http://stackoverflow.com/questions/28201794/slow-startup-on-tomcat-7-0-57-because-of-securerandom</a></li>
+<li><a href="https://hub.docker.com/r/fbrx/tomcat/">https://hub.docker.com/r/fbrx/tomcat/</a></li>
+<li><a href="http://security.stackexchange.com/questions/89/feeding-dev-random-entropy-pool">http://security.stackexchange.com/questions/89/feeding-dev-random-entropy-pool</a></li>
+<li><a href="https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source">https://wiki.apache.org/tomcat/HowTo/FasterStartUp#Entropy_Source</a></li>
+<li><a href="http://linux.die.net/man/4/random">http://linux.die.net/man/4/random</a></li>
+</ul>
+
+        </div>
+        <div class="post-single-meta-bottom">
+            
+            <div class="post-tags">
+                Tags:
+                
+                <a class="post-tag post-tag-tomcat" href="/tags/tomcat/#blog">tomcat</a>
+                
+                <a class="post-tag post-tag-web" href="/tags/web/#blog">web</a>
+                
+                <a class="post-tag post-tag-docker" href="/tags/docker/#blog">docker</a>
+                
+                <a class="post-tag post-tag-cloud" href="/tags/cloud/#blog">cloud</a>
+                
+                <a class="post-tag post-tag-performance" href="/tags/performance/#blog">performance</a>
+                
+            </div>
+            
+            
+            <div class="post-categories">
+                Categories:
+                
+                <a class="post-category post-category-development" href="/categories/development/#blog">development</a>
+                
+            </div>
+            
+        </div>
+        <section class="post-comments">
+
+</section>
+
+      </div>
+    </div>
+  </body>
+  
+</html>
